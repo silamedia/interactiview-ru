@@ -346,7 +346,7 @@ function mark(){
  $('cw').textContent=c.f.who;$('ct').textContent=hms(c.f.a)+'–'+hms(c.f.b);
  var ps=$('story').querySelector('.quote');if(ps)ps.textContent='«'+c.f.quote+'»';
  var ab=$('story').querySelector('.about');if(ab)ab.textContent=c.f.who.charAt(0).toUpperCase()+c.f.who.slice(1)+': '+c.f.sum.charAt(0).toLowerCase()+c.f.sum.slice(1);
- var sr=$('story').querySelector('.src a');if(sr)sr.href=yurl(c.f);
+ var sr=$('story').querySelector('.src');if(sr)sr.innerHTML='Источник: «'+esc(c.ep.t)+'», '+esc(c.ep.show)+'. <a href="'+yurl(c.f)+'" target="_blank" rel="noopener">Смотреть эфир с этого места</a>';
 }
 function showErr(){var c=cur();var e=$('err');if(!e)return;e.hidden=false;e.innerHTML='<div>Плеер YouTube не запустился. Откройте файл по адресу сайта (http/https), а не из папки, или смотрите на YouTube.</div><a href="'+yurl(c.f)+'" target="_blank" rel="noopener">Смотреть с '+hms(c.f.a)+' на YouTube</a>'}
 function loadApi(cb){
