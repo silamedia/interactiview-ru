@@ -387,9 +387,11 @@ function playFrag(){
   var c2=cur(),a=c2.f.a,b=c2.f.b;
   if(!player){
    playerVid=c2.vid;
-   player=new YT.Player('yt',{width:'100%',height:'100%',videoId:c2.vid,
-    playerVars:{autoplay:1,controls:1,rel:0,modestbranding:1,playsinline:1,start:a,end:b},
-    events:{onReady:function(e){e.target.playVideo()},onError:showErr}});
+   player=new YT.Player('yt',{width:'100%',height:'100%',
+    playerVars:{controls:1,rel:0,modestbranding:1,playsinline:1},
+    events:{onReady:function(e){e.target.loadVideoById({videoId:c2.vid,startSeconds:a,endSeconds:b})},
+     onStateChange:function(e){(window.__dbg=window.__dbg||[]).push([e.data,Math.round(e.target.getCurrentTime())])},
+     onError:showErr}});
   }else if(playerVid===c2.vid){
    player.seekTo(a,true);player.playVideo();
   }else{
@@ -404,7 +406,7 @@ setInterval(function(){
   if(!player||!player.getPlayerState)return;
   var c=cur(),key=si+'-'+qi+'-'+fi,st=player.getPlayerState();
   if(key!==startedKey||advKey===key||playerVid!==c.vid)return;
-  var done=(st===1&&player.getCurrentTime()>=c.f.b)||st===0;
+  var t=player.getCurrentTime(),done=(st===1&&t>=c.f.b)||(st===0&&t>=c.f.b-2);
   if(!done)return;
   advKey=key;
   if(fi<c.q.frags.length-1){go(fi+1,true)}else{try{player.pauseVideo()}catch(e){}}
