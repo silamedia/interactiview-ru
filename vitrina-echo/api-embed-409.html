@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Проверка API YouTube с 6:49</title>
+<style>body{font:18px system-ui;margin:24px;max-width:800px}#yt{width:100%;aspect-ratio:16/9}button{font:inherit;padding:12px;margin:12px 0}</style>
+<h1>Проверка плеера витрины с 6:49</h1><p>Кнопка запускает тот же способ, что витрина: готовый плеер YouTube получает seekTo(409, true).</p>
+<div id="yt"></div><button id="play" disabled>Смотреть с 6:49</button><pre id="log"></pre>
+<script>
+let player, ready=false;
+function log(s){document.getElementById('log').textContent+=s+'\n'}
+window.onYouTubeIframeAPIReady=function(){
+ player=new YT.Player('yt',{width:'100%',height:'100%',videoId:'nIE6WajF7vk',playerVars:{controls:1,rel:0,modestbranding:1,playsinline:1,start:409},events:{
+  onReady:function(e){ready=true;e.target.cueVideoById({videoId:'nIE6WajF7vk',startSeconds:409});document.getElementById('play').disabled=false;log('ready; cued at 409')},
+  onStateChange:function(e){log('state '+e.data+' time '+Math.round(e.target.getCurrentTime()))},
+  onError:function(e){log('error '+e.data)}
+ }});
+};
+document.getElementById('play').onclick=function(){if(ready){log('seek 409');player.seekTo(409,true)}};
+let script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';document.head.appendChild(script);
+</script></html>
