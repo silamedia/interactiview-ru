@@ -400,7 +400,13 @@ function playFrag(){
  $('cover').hidden=true;$('err').hidden=true;
  if(!player||!ready){pendingPlay=true;initPlayer();return}
  var a=c.f.a;
- if(playerVid===c.vid){dbg('seek '+a);player.seekTo(a,true);player.playVideo()}
+ if(playerVid===c.vid){
+  dbg('seek '+a);
+  var wasPaused=player.getPlayerState&&player.getPlayerState()===2;
+  player.seekTo(a,true);
+  // A seek resumes a playing or cued video. Only a paused player needs playVideo().
+  if(wasPaused)player.playVideo();
+ }
  else{playerVid=c.vid;dbg('load '+c.vid+' '+a);player.loadVideoById({videoId:c.vid,startSeconds:a})}
 }
 
