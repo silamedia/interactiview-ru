@@ -1,0 +1,17 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Проверка перехода после рекламы</title>
+<style>body{font:18px system-ui;margin:24px;max-width:800px}#yt{width:100%;aspect-ratio:16/9}button{font:inherit;padding:12px;margin:12px 0}pre{white-space:pre-wrap}</style>
+<h1>Проверка перехода после рекламы</h1><p>Ролик запускается с начала. Когда YouTube начнёт показывать сам ролик, плеер один раз переходит к ответу с 39:45.</p>
+<div id="yt"></div><button id="play" disabled>Смотреть ответ с 39:45</button><pre id="log"></pre>
+<script>
+const id='OxdB36UaGj0', target=2385;let player,ready=false,pendingSeek=false;
+function log(x){document.getElementById('log').textContent+=x+'\n'}
+window.onYouTubeIframeAPIReady=function(){
+ player=new YT.Player('yt',{width:'100%',height:'100%',playerVars:{controls:1,playsinline:1},events:{
+  onReady:function(){ready=true;document.getElementById('play').disabled=false;log('ready')},
+  onStateChange:function(e){let t=Math.round(e.target.getCurrentTime());log('state '+e.data+' time '+t);if(e.data===1&&pendingSeek){pendingSeek=false;log('seek '+target);e.target.seekTo(target,true)}},
+  onError:function(e){log('error '+e.data)}
+ }});
+};
+document.getElementById('play').onclick=function(){if(!ready)return;pendingSeek=true;log('load '+id+' at 0');player.loadVideoById({videoId:id,startSeconds:0})};
+let script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';document.head.appendChild(script);
+</script></html>
