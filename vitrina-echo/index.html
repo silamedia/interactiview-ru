@@ -391,14 +391,14 @@ function playFrag(){
    playerVid=c2.vid;
    player=new YT.Player('yt',{width:'100%',height:'100%',
     playerVars:{controls:1,rel:0,modestbranding:1,playsinline:1},
-    events:{onReady:function(e){dbg('load(onReady) '+c2.vid+' '+a);e.target.loadVideoById({videoId:c2.vid,startSeconds:a,endSeconds:b})},
+    events:{onReady:function(e){dbg('load(onReady) '+c2.vid+' '+a);e.target.loadVideoById({videoId:c2.vid,startSeconds:a})},
      onStateChange:function(e){(window.__dbg=window.__dbg||[]).push([e.data,Math.round(e.target.getCurrentTime())])},
      onError:showErr}});
   }else if(playerVid===c2.vid){
    dbg('seek '+a);player.seekTo(a,true);player.playVideo();
   }else{
    playerVid=c2.vid;
-   dbg('load '+c2.vid+' '+a);player.loadVideoById({videoId:c2.vid,startSeconds:a,endSeconds:b});
+   dbg('load '+c2.vid+' '+a);player.loadVideoById({videoId:c2.vid,startSeconds:a});
   }
  });
 }
