@@ -1,0 +1,14 @@
+<!doctype html><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><title>Тест рекламы</title>
+<body style="font:16px/1.5 system-ui;max-width:900px;margin:24px auto;padding:0 16px">
+<h1 style="font-size:22px">Тест: сколько реклам при разных стартах</h1>
+<p>Нажимайте кнопки по очереди. После каждой посмотрите, сколько рекламных блоков показал YouTube до видео, и запишите.</p>
+<div id=b></div>
+<div style="aspect-ratio:16/9;background:#000;margin:14px 0"><div id=f style="width:100%;height:100%"></div></div>
+<script>
+var V='nIE6WajF7vk';
+var T=[['А. Старт с начала ролика (0 с)','https://www.youtube.com/embed/'+V+'?autoplay=1&start=0'],
+['Б. Старт с 6:26 (386 с)','https://www.youtube.com/embed/'+V+'?autoplay=1&start=386'],
+['В. Старт с 30:00 (1800 с)','https://www.youtube.com/embed/'+V+'?autoplay=1&start=1800'],
+['Г. Старт с 6:26, домен youtube-nocookie','https://www.youtube-nocookie.com/embed/'+V+'?autoplay=1&start=386']];
+T.forEach(function(t){var x=document.createElement('button');x.textContent=t[0];x.style.cssText='display:block;margin:6px 0;padding:10px 14px;font:inherit;cursor:pointer';x.onclick=function(){document.getElementById('f').innerHTML='<iframe src="'+t[1]+'" style="width:100%;height:100%;border:0" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe>'};document.getElementById('b').appendChild(x)});
+</script>
