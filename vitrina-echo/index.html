@@ -352,13 +352,12 @@ function update(){
 }
 
 function go(k){
- fi=k;update();setEmbed(true);
+ fi=k;update();setEmbed();
 }
 
-function setEmbed(autoplay){
+function setEmbed(){
  var c=cur();
- $('yt').src='https://www.youtube.com/embed/'+encodeURIComponent(c.vid)+'?start='+c.f.a+(autoplay?'&autoplay=1':'');
- $('story').querySelector('.watchhint').textContent=autoplay?'Если видео не началось автоматически, нажмите Play внутри него.':'Нажмите Play внутри видео, чтобы посмотреть ответ.';
+ $('yt').src='https://www.youtube.com/embed/'+encodeURIComponent(c.vid)+'?start='+c.f.a;
 }
 
 build();
